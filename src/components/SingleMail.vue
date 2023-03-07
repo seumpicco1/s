@@ -1,0 +1,40 @@
+<script setup>
+import { defineProps } from 'vue'
+const props = defineProps({
+    mail: {
+        type: Object,
+        required: true    },
+    layout: {
+        type: Object,
+        default: { type: 'flex' }
+    }
+})
+
+
+     defineEmits(['chooseMail'])
+     
+     
+     </script>
+
+
+<template>
+  <div :class="layout.colSpanNo === 1 ? `col-span-${layout.colSpanValue}` : ''">
+    <input type="checkbox" value="mail.id"  
+    @click="$emit('chooseMail', {
+                    mailId : mail.id,
+                    eTarget : $event.target,
+                    mailStatus: { status: 'read' }
+                })
+            "
+     /> <span> {{ mail.title }} </span>
+  </div>
+  <div :class="layout.colSpanNo === 2 ? `col-span-${layout.colSpanValue}` : ''">
+    {{ mail.body }}
+  </div>
+  <div :class="layout.colSpanNo === 3 ? `col-span-${layout.colSpanValue}` : ''">
+    {{ mail.keywords.join("/ ") }}
+  </div>
+</template>
+<style scoped>
+
+</style>
